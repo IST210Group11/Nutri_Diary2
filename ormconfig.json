@@ -5,7 +5,6 @@
   "migrations": ["migrations/**/*.js"],
   "synchronize": true,
   "database": "db.db",
-  "host": "https://nutri-diary2.vercel.app",
   "cli": {
     "entitiesDir": "./entities",
     "migrationsDir": "./migrations"
