@@ -1,4 +1,4 @@
-import {connect, getRepo} from "../../../utils/api/api.ts";
+import {connect, getRepo, cors} from "../../../utils/api/api.ts";
 import {getRepository, Like, SUM} from "typeorm";
 import FoodList from "../../../entities/DailyValues";
 

@@ -1,7 +1,6 @@
 import {connect, getRepo, cors} from "../../../../utils/api/api.ts";
 import {getRepository, Like} from "typeorm";
 import finaltable from "../../../../entities/finaltable";
-
 export default async (req, res) => {
     if (req.method === "POST") {
         await cors(req, res);
