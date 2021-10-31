@@ -5,7 +5,8 @@ const ApiContext = createContext({})
 
 const ApiProvider = ({ children }) => {
     const api = axios.create({
-        baseURL: "https://nutri-diary2.vercel.app" + "/api"
+        // baseURL: "process.env.BASE_URL" + "/api"
+        baseURL: "https://nutri-diary2.vercel.app/api" 
     })
 
     const getDescriptions = async (description) => {
