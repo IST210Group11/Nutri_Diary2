@@ -24,7 +24,7 @@ export const connect = async () => {
         name: "default",
         type: "sqlite",
         entities: [DailyValues, finaltable, FoodList],
-        database: "https://nutri-diary-capstone.herokuapp.com/db.db",
+        database: "db.db",
         synchronize: true
     })
     // const connectionOptions = await getConnectionOptions()
