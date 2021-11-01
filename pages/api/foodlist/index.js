@@ -1,6 +1,6 @@
 import dbConnect from "../../../../utils/api/api.ts";
-import foodlist from '../../../../entities/FoodList2';
-import fdc from '../../../entities/'
+import foodlist from '../../../entities/FoodList2';
+
 
 export default async (req, res) => {
     if (req.method === "POST") {
