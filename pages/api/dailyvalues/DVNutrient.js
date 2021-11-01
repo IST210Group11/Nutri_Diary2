@@ -1,21 +1,20 @@
-import {connect, getRepo, cors} from "../../../utils/api/api.ts";
-import {getRepository, Like, SUM} from "typeorm";
-import FoodList from "../../../entities/DailyValues";
+// import {connect, getRepo, cors} from "../../../utils/api/api.ts";
+// import {getRepository, Like, SUM} from "typeorm";
+// import FoodList from "../../../entities/DailyValues";
 
 
-export default async (req, res) => {
-    if (req.method === "POST") {
-        await cors(req, res);
-        const connection = await connect()
+// export default async (req, res) => {
+//     if (req.method === "POST") {
+//         const connection = await connect()
 
-        const { description } = req.body
+//         const { description } = req.body
 
 
-        const data = await getRepo(connection, "DailyValues")
-            .createQueryBuilder("DailyValues")
-            .select(`SUM(DailyValues.${description})`, "sum")
-            .getRawOne(); 
+//         const data = await getRepo(connection, "DailyValues")
+//             .createQueryBuilder("DailyValues")
+//             .select(`SUM(DailyValues.${description})`, "sum")
+//             .getRawOne(); 
 
-        res.status(200).json({ data })
-    }
-}
+//         res.status(200).json({ data })
+//     }
+// }
