@@ -1,48 +1,40 @@
-import DailyValues from "../../entities/DailyValues";
-import finaltable from "../../entities/finaltable";
-import FoodList from '../../entities/FoodList';
-import Cors from 'cors';
-import {Connection, createConnection, getConnection, getConnectionOptions, getRepository, getConnectionManager} from "typeorm";
+import mongoose from 'mongoose'
 
-const initMiddleware = (middleware) => (req, res) => new Promise((resolve, reject) => {
-    middleware(req, res, (result) => {
-        if (result instanceof Error) return reject(result);
-        else return resolve(result);
-    })
-})
+const MONGODB_URI = process.env.MONGODB_URI
 
-export const cors = initMiddleware(Cors({ origin: "*", methods: ["GET", "POST", "OPTIONS"]}));
-
-export const connect = async () => {
-    try {
-        const connection = getConnectionManager().get("default");
-        await connection.close()
-    } catch (e) {
-        console.error(e)
-    }
-    const connection = await createConnection({
-        name: "default",
-        type: "sqlite",
-        entities: [DailyValues, finaltable, FoodList],
-        database: "db.db",
-        synchronize: true
-    })
-    // const connectionOptions = await getConnectionOptions()
-    // const options: any = {
-    //     ...connectionOptions,
-    //     entities: [DailyValues, finaltable, FoodList]
-    // }
-    // return await createConnection(options)
-    return connection
+if (!MONGODB_URI) {
+  throw new Error(
+    'Please define the MONGODB_URI environment variable inside .env.local'
+  )
 }
 
-export const getRepo = (connection: Connection, repo: "DailyValues" | "FDC" | "FoodList") => {
-    switch (repo) {
-        case "DailyValues":
-            return getRepository(DailyValues)
-        case "FDC":
-            return getRepository(finaltable)
-        case "FoodList":
-            return getRepository(FoodList)
-    }
+/**
+ * Global is used here to maintain a cached connection across hot reloads
+ * in development. This prevents connections growing exponentially
+ * during API Route usage.
+ */
+let cached = global.mongoose
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null }
 }
+
+async function dbConnect() {
+  if (cached.conn) {
+    return cached.conn
+  }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    }
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      return mongoose
+    })
+  }
+  cached.conn = await cached.promise
+  return cached.conn
+}
+
+export default dbConnect
