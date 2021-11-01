@@ -13,6 +13,12 @@ module.exports = {
       }
     ]
   },
+  development: {
+      client: 'sqlite3',
+      connection: {
+        filename: 'db.db'
+      }
+    },
   reactStrictMode: true,
   env: {
     BASE_URL: "https://nutri-diary2.vercel.app"
