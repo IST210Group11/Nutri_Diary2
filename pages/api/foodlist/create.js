@@ -8,7 +8,13 @@ export default async (req, res) => {
         const { description } = req.body
 
         try {
-            const data = await foodlist.insertOne({ ...description }).exec()
+            console.log(description)
+            const data = await new Promise((resolve, reject) => {
+                foodlist.create({ ...description }, (err, doc) => {
+                    if (err) return reject(err)
+                    else return resolve(doc)
+                })
+            })
 
 
             // const data = await getRepo(connection, "FDC")

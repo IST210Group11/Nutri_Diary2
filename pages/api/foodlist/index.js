@@ -3,26 +3,23 @@ import foodlist from '../../../entities/FoodList2';
 
 
 export default async (req, res) => {
-    if (req.method === "POST") {
-        await dbConnect()
+    await dbConnect()
 
-        const { description } = req.body
+    const { description } = req.body
 
-        try {
-            const data = await foodlist.find().exec()
+    try {
+        const data = await foodlist.find()
 
 
-            // const data = await getRepo(connection, "FDC")
-            //     .find({
-            //         where: {
-            //             description: Like(`%${description}%`),
-            //         },
-            //         take: 20
-            //     })
-            res.status(200).json({ data })
-        } catch (e) {
-            console.error(e)
-        }
-    
+        // const data = await getRepo(connection, "FDC")
+        //     .find({
+        //         where: {
+        //             description: Like(`%${description}%`),
+        //         },
+        //         take: 20
+        //     })
+        res.status(200).json({ data })
+    } catch (e) {
+        console.error(e)
     }
 }

@@ -21,8 +21,9 @@ module.exports = {
     },
   reactStrictMode: true,
   env: {
-    // BASE_URL: "https://nutri-diary-capstone.herokuapp.com"
+    
     BASE_URL: "https://nutri-diary2.vercel.app",
+    // BASE_URL: "http://localhost:3000",
     MONGODB_URI: "mongodb+srv://dbUser:dbUserPassword@cluster0.lbqvl.mongodb.net/nutri-diary"
   }
 }
