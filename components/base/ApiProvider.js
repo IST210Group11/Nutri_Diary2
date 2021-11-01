@@ -44,9 +44,9 @@ const ApiProvider = ({ children }) => {
         }
     }
 
-    const addFoodList = async (data) => {
+    const addFoodList = async (description) => {
         try {
-            return (await api.post("/foodlist/create", data)).data
+            return (await api.post("/foodlist/create", {description})).data
         } catch (e) {
             console.error(e)
         }

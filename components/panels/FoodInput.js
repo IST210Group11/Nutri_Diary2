@@ -45,6 +45,8 @@ const SearchItem = ({ description, index }) => {
                 'Amount in g': Weight
             }
 
+            console.log("DESCRIPTION2", description2)
+
             await addFoodList(description2)
         } catch (e) {
             console.error(e)
