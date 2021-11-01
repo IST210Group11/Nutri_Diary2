@@ -46,18 +46,3 @@ export const getRepo = (connection: Connection, repo: "DailyValues" | "FDC" | "F
             return getRepository(FoodList)
     }
 }
-
-export const initializeDatabase = async (optionOverrides: Record<string, any> = {}): Promise<Connection> => {
-    const connectionOptions = await getConnectionOptions();
-    const options: any = {
-      ...connectionOptions,
-      entities: [DailyValues, finaltable, FoodList],
-      ...optionOverrides
-    };
-  
-    const connection = await createConnection(options);
-  
-    return connection;
-  };
-
-export default initializeDatabase;
