@@ -1,10 +1,28 @@
-// import {connect, getRepo,cors} from "../../../utils/api/api.ts";
+import dbConnect from "../../../../utils/api/api.ts";
+import foodlist from '../../../../entities/FoodList2';
+import fdc from '../../../entities/'
 
-// export default async (req, res) => {
-//     const connection = await connect()
-//     const foodListRepo = getRepo(connection, "FoodList")
+export default async (req, res) => {
+    if (req.method === "POST") {
+        await dbConnect()
 
-//     const data = await foodListRepo.find()
+        const { description } = req.body
 
-//     res.status(200).json({ data })
-// }
+        try {
+            const data = await foodlist.find().exec()
+
+
+            // const data = await getRepo(connection, "FDC")
+            //     .find({
+            //         where: {
+            //             description: Like(`%${description}%`),
+            //         },
+            //         take: 20
+            //     })
+            res.status(200).json({ data })
+        } catch (e) {
+            console.error(e)
+        }
+    
+    }
+}
