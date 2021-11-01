@@ -1,4 +1,4 @@
-import dbConnect from "../../../../utils/api/api.ts";
+import dbConnect from "../../../utils/api/api.ts";
 import foodlist from '../../../entities/FoodList2';
 
 export default async (req, res) => {
