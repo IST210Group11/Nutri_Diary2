@@ -8,7 +8,7 @@ export default async (req, res) => {
 
     try {
         const hasUser = await User.findOne({ user_id }).exec()
-        if (!hasUser) {
+        if (hasUser && hasUser.length <= 0) {
             const user = await User.create({ user_id })
             res.status(200).json({ data: user })
         } else {
