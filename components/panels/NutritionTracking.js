@@ -63,14 +63,16 @@ const NutritionTracking = ({ index }) => {
     }, [currentPage])
 
     useEffect(() => {
-        if (nutrientSums && factor) {
+        if (nutrientSums) {
+            const userFactor = factor ?? 1
+
             setBarChartData(barChartFields.reduce((result, current) => {
                 return [
                     ...result,
                     {
                         name: current,
-                        Progress: (nutrientSums[current] * 100 / (dailyValues[current] * factor)).toFixed(2),
-                        Left: (100 - (nutrientSums[current] * 100 / (dailyValues[current] * factor))).toFixed(2)
+                        Progress: (nutrientSums[current] * 100 / (dailyValues[current] * userFactor)).toFixed(2),
+                        Left: (100 - (nutrientSums[current] * 100 / (dailyValues[current] * userFactor))).toFixed(2)
                     }
                 ]
             }, []))

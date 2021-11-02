@@ -6,9 +6,10 @@ export default async (req, res) => {
         await dbConnect()
 
         const { description, user_id } = req.body
+        const { _id, ...desc } = description
 
         try {
-            const data = await foodlist.findOneAndUpdate({ user_id, description: new RegExp(description.description) }, { ...description, user_id }, { upsert: true, new: true }).exec()
+            const data = await foodlist.findOneAndUpdate({ user_id, description: new RegExp(description.description) }, { ...desc, user_id }, { upsert: true, new: true }).exec()
             res.status(200).json({ data })
         } catch (e) {
             console.error(e)

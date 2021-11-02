@@ -20,10 +20,13 @@ const UserProvider = ({ children }) => {
             try {
                 if (!isLoading && userAuth0 && userAuth0.sub) {
                     const userData = await fetchUser()
-                    if (Object.keys(userData).length > 0) {
+                    console.log(userAuth0.sub, userData)
+                    if (userData && Object.keys(userData).length > 0) {
                         setUser({...userData, user_id: userAuth0.sub})
                     } else {
+                        console.log("CREATING", userAuth0.sub)
                         const newUser = await createUser(userAuth0.sub)
+                        console.log(newUser)
                         setUser({...newUser, user_id: userAuth0.sub})
                     }
                 }
@@ -31,7 +34,7 @@ const UserProvider = ({ children }) => {
                 console.error(e)
             }
         })()
-    }, [userAuth0, isLoading])
+    }, [userAuth0, isLoading, userAuth0?.sub])
 
     useEffect(() => {
         (async () => {
