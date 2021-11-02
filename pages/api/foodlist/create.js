@@ -8,12 +8,7 @@ export default async (req, res) => {
         const { description, user_id } = req.body
 
         try {
-            const data = await new Promise((resolve, reject) => {
-                foodlist.create({ ...description, user_id }, (err, doc) => {
-                    if (err) return reject(err)
-                    else return resolve(doc)
-                })
-            })
+            const data = await foodlist.findOneAndUpdate({ user_id }, { ...description, user_id }, { upsert: true, new: true }).exec()
             res.status(200).json({ data })
         } catch (e) {
             console.error(e)

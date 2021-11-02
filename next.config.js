@@ -15,12 +15,12 @@ module.exports = {
   },
   reactStrictMode: true,
   env: {
-    BASE_URL: "https://nutri-diary2.vercel.app",
-    // BASE_URL: "http://localhost:3000",
+    // BASE_URL: "https://nutri-diary2.vercel.app",
+    BASE_URL: "http://localhost:3000",
     MONGODB_URI: "mongodb+srv://dbUser:dbUserPassword@cluster0.lbqvl.mongodb.net/nutri-diary",
     AUTH0_SECRET:'c2c9d231d92d6600fb2c723d05abd6a97c205b3f62d97604eeb02da71b525ff3',
-    // AUTH0_BASE_URL:'http://localhost:3000',
-    AUTH0_BASE_URL: "https://nutri-diary2.vercel.app",
+    AUTH0_BASE_URL:'http://localhost:3000',
+    // AUTH0_BASE_URL: "https://nutri-diary2.vercel.app",
     AUTH0_ISSUER_BASE_URL:'https://dev-j2t8o429.us.auth0.com',
     AUTH0_CLIENT_ID:'SKlHjNnC58dabtDnPh75ytk8k3fgxb43',
     AUTH0_CLIENT_SECRET:'eFeUD37yhwzOzGExMxq69FLtudDlhyJAYwZjtpJkHvTALedqvBkBXSIlYywzWipU'

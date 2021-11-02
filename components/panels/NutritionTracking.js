@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {
-    Grid,
+    Button,
+    Grid, Typography,
 } from "@mui/material";
 import {useApi} from "../base/ApiProvider";
 import PieCard from "../base/PieCard";
@@ -50,8 +51,8 @@ const NutritionTracking = ({ index }) => {
     const [nutrientSums, setNutrientSums] = useState({})
     const [barChartData, setBarChartData] = useState([])
     const { getNutrientSum, } = useApi()
-    const { user_id, factor } = useAuthUser()
-    const { currentPage } = useSidebar()
+    const { user_id, factor, height } = useAuthUser()
+    const { currentPage, changePage } = useSidebar()
 
     useEffect(() => {
         (async () => {
@@ -62,7 +63,7 @@ const NutritionTracking = ({ index }) => {
     }, [currentPage])
 
     useEffect(() => {
-        if (nutrientSums) {
+        if (nutrientSums && factor) {
             setBarChartData(barChartFields.reduce((result, current) => {
                 return [
                     ...result,
@@ -86,6 +87,37 @@ const NutritionTracking = ({ index }) => {
                     nutrientSums={nutrientSums}
                     title={getPieChartName(field)}
                 />
+            </Grid>
+        )
+    }
+
+    const handleClick = () => {
+        changePage(1)  // change to food input
+    }
+
+    if (!nutrientSums || !factor || !height) {
+        return (
+            <Grid container justifyContent="center" alignItems="center" height="100%" direction="column">
+                <Typography
+                    fontSize={50}
+                    fontWeight="bold"
+                    fontFamily="Montserrat"
+                >
+                    Add Food Item
+                </Typography>
+                <Button
+                    variant="outlined"
+                    sx={{ backgroundColor: "#2878DA", color: "white", padding: "10px 30px" }}
+                    onClick={handleClick}
+                >
+                    <Typography
+                        fontSize={32}
+                        fontWeight="bold"
+                        fontFamily="Montserrat"
+                    >
+                        Food Input
+                    </Typography>
+                </Button>
             </Grid>
         )
     }
