@@ -8,6 +8,7 @@ import TabProvider from "../components/base/TabProvider";
 import {theme} from "../theme";
 import {useEffect} from "react";
 import ApiProvider from "../components/base/ApiProvider";
+import { useUser } from '@auth0/nextjs-auth0';
 
 export default function Home() {
     return (
@@ -21,3 +22,20 @@ export default function Home() {
         </ThemeProvider>
     )
 }
+
+// export default function Index() {
+//   const { user, error, isLoading } = useUser();
+
+//   if (isLoading) return <div>Loading...</div>;
+//   if (error) return <div>{error.message}</div>;
+
+//   if (user) {
+//     return (
+//       <div>
+//         Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
+//       </div>
+//     );
+//   }
+
+//   return <a href="/api/auth/login">Login</a>;
+// }

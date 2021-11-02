@@ -66,6 +66,7 @@ const SearchItem = ({ description, index }) => {
                     >
                         { description.description }
                     </Typography>
+                    <a href="/api/auth/login">Login</a>
                 </Grid>
                 <Grid item container sx={{ mt: 0.5 }} spacing={2} justifyContent="flex-start">
                     <Grid item>

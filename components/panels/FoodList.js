@@ -65,6 +65,13 @@ const SearchItem = ({ description, index }) => {
                             Fat: { description["Fat G"] }g
                         </Typography>
                     </Grid>
+                    <Grid item sx={{ ml: 2 }}>
+                         <Typography
+                            sx={{ fontSize: 14, fontWeight: 500 }}
+                        >
+                            Amount in g: { description["Amount in g"] }g
+                        </Typography>
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={2} alignItems="center" container justifyContent="center">
@@ -96,10 +103,15 @@ const FoodSearch = ({ descriptions }) => {
 
 const FoodList = () => {
     const [descriptions, setDescriptions] = useState([])
+    const [Caloriessum, setCaloriesSum] = useState(1)
     const { getFoodList } = useApi()
+    const { getNutrientSum } = useApi()
     const action = async () => {
         try {
             setDescriptions((await getFoodList()).data)
+            const variable = JSON.parse((await getNutrientSum()).data)
+            setCaloriesSum(variable["Protein G"])
+            console.log(variable)
         } catch (e) {
             console.error(e)
         }
@@ -107,8 +119,13 @@ const FoodList = () => {
     useEffect(() => {action()},[]);
     return (
         <Grid item container>
-                <FoodSearch descriptions={descriptions} />
+            {/* <FoodSearch descriptions={descriptions} /> */}
+            <p>
+                {Caloriessum}
+            </p>
         </Grid>
+        
+        
 
     ) }  
 export default FoodList

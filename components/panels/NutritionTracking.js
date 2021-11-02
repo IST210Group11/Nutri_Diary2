@@ -75,7 +75,8 @@ const NutritionTracking = () => {
     const action = async () => {
         try {
             // Macronutrients
-            setCaloriesSum((await getNutrientSum("Energy KCAL")).data.sum)
+            setCaloriesSum((await getNutrientSum()).data["Energy KCAL"])
+            console.log(Caloriessum)
             setCaloriesSumDV((await getDVNutrient("Energy KCAL")).data.sum)
             setCarbohydrateSum((await getNutrientSum("Carbohydrates G")).data.sum)
             setCarbohydrateSumDV((await getDVNutrient("Carbohydrates G")).data.sum)

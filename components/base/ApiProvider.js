@@ -28,7 +28,7 @@ const ApiProvider = ({ children }) => {
 
     const getDVNutrient = async (description) => {
         try {
-            return (await api.post("/dailyvalues/DVNutrient", {
+            return (await api.get("/dailyvalues/DVNutrient", {
                 description
             })).data
         } catch (e) {
@@ -52,20 +52,18 @@ const ApiProvider = ({ children }) => {
         }
     }
 
-    const removeFoodList = async (data) => {
+    const removeFoodList = async (description) => {
         try {
-            return (await api.post("/foodlist/remove", data)).data
+            return (await api.post("/foodlist/remove", {description})).data
         } catch (e) {
             console.error(e)
         }
     }
 
 
-    const getNutrientSum = async (description) => {
+    const getNutrientSum = async () => {
         try {
-            return (await api.post("/foodlist/nutrientsum", {
-                description
-            })).data
+            return (await api.get("/foodlist/nutrientsum")).data
         } catch (e) {
             console.error(e)
         }

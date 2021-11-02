@@ -1,22 +1,26 @@
-// import {connect, getRepo,cors} from "../../../utils/api/api.ts";
-// import {getRepository, Like, SUM} from "typeorm";
-// import FoodList from "../../../entities/FoodList";
+import dbConnect from "../../../utils/api/api.ts";
+import foodlist from '../../../entities/FoodList2';
 
 
-// export default async (req, res) => {
-//     if (req.method === "POST") {
-//         const connection = await connect()
-//         const foodListRepo = await getRepo(connection, "FoodList")
-//         const { description } = req.body
-        
+export default async (req, res) => {
+    if (req.method === "POST") {
+        await dbConnect()
 
-//         const { ...body } = req.body
-//         console.log(body)
-//         const newEntry = foodListRepo.create(body)
+        const { description } = req.body
 
-//         const data = await foodListRepo.delete(newEntry)
-//         res.status(200).json({ data })
+        try {
+            console.log(description)
+            const data = await new Promise((resolve, reject) => {
+                foodlist.deleteOne({ ...description }, (err, doc) => {
+                    if (err) return reject(err)
+                    else return resolve(doc)
+                })
+            })
+            res.status(200).json({ data })
+        } catch (e) {
+            console.error(e)
+        }
+    
+    }
+}
 
-        
-//     }
-// }
