@@ -3,7 +3,7 @@ import React, {createContext, useCallback, useContext, useMemo, useState} from '
 const NavbarContext = createContext({ tab: 0 })
 
 const TabProvider = ({ children }) => {
-    const [tab, setTab] = useState(1)
+    const [tab, setTab] = useState(3)
 
     const changeTab = useCallback((newTab) => {
         setTab(newTab)
