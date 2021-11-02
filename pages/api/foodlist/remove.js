@@ -6,12 +6,12 @@ export default async (req, res) => {
     if (req.method === "POST") {
         await dbConnect()
 
-        const { description } = req.body
+        const { description, user_id } = req.body
 
         try {
             console.log(description)
             const data = await new Promise((resolve, reject) => {
-                foodlist.deleteOne({ ...description }, (err, doc) => {
+                foodlist.deleteOne({ ...description, user_id }, (err, doc) => {
                     if (err) return reject(err)
                     else return resolve(doc)
                 })

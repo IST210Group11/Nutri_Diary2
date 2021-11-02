@@ -2,6 +2,8 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {Button, Grid, styled, Typography, TextField, InputAdornment, InputLabel,} from "@mui/material";
 import SearchBar from "../base/SearchBar";
 import {useApi} from "../base/ApiProvider";
+import FoodRowLegend from "../base/FoodRowLegend";
+import FoodRow from "../base/FoodRow";
 
 const StyledButton = styled(Button)({
     padding: "10px 10px",
@@ -139,12 +141,10 @@ const FoodSearch = ({ descriptions }) => {
     return null
 }
 
-const FoodInput = () => {
+const FoodInput = ({ index }) => {
     const [searchValue, setSearchValue] = useState("")
     const [descriptions, setDescriptions] = useState([])
     const { getDescriptions } = useApi()
-
-    console.log(descriptions)
 
     const onClickSearch = async () => {
         try {
@@ -165,7 +165,10 @@ const FoodInput = () => {
                 </div>
             </Grid>
             <Grid item container sx={{ mt: 2, pb: 4 }}>
-                <FoodSearch descriptions={descriptions} />
+                { descriptions.length > 0 && <FoodRowLegend /> }
+                {
+                    descriptions.map((description, index) => <FoodRow food={description} key={index} type="add" />)
+                }
             </Grid>
         </Grid>
     )

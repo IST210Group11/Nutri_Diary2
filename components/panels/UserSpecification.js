@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
     Button,
     FormControl,
@@ -10,6 +10,8 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import {useApi} from "../base/ApiProvider";
+import {useAuthUser} from "../base/UserProvider";
 
 
 const StyledButton = styled(Button)({
@@ -23,11 +25,13 @@ const StyledButton = styled(Button)({
 
 
 
-const UserSpecification = () => {
+const UserSpecification = ({ index }) => {
     const [gender, setGender] = useState("male")
     const [height, setHeight] = useState(70)
     const [age, setAge] = useState(20)
     const [weight ,setWeight] = useState(180)
+    const { updateUserSpecification } = useApi()
+    const { user_id } = useAuthUser()
 
     const onChangeGender = (event) => {
         setGender(event.target.value)
@@ -45,9 +49,11 @@ const UserSpecification = () => {
         setAge(event.target.value)
     }
 
-    const onSubmit = async () => {
+    const onSubmit =async () => {
         try {
-            await createUserSpecification({ gender, height, age, weight })
+            console.log(user_id)
+            if (user_id)
+                await updateUserSpecification(user_id, { gender, height, age, weight })
         } catch (e) {
             console.error(e)
         }

@@ -19,7 +19,8 @@ const FoodListSchema = new mongoose.Schema({ "Calcium, Ca MG": Number,
 "Vitamin D UG": Number, 
 "Zinc, Zn MG": Number, 
 "description": String,
-'Amount in g': Number
+'Amount in g': Number,
+ user_id: String
  }, { collection: "foodlist" })
 
 export default mongoose.models.foodlist || mongoose.model('foodlist', FoodListSchema)

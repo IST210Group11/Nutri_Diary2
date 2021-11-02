@@ -4,35 +4,50 @@ import FoodInput from "../panels/FoodInput";
 import FoodList from "../panels/FoodList";
 import UserSpecification from "../panels/UserSpecification";
 import {Box, Grid, styled} from "@mui/material";
+import {useState} from "react";
+import Sidebar from "./Sidebar";
+import {withPageAuthRequired} from "@auth0/nextjs-auth0";
+import {useSidebar} from "./SidebarProvider";
 
 const selectPage = (tab) => {
     switch (tab) {
         case 0:
-            return <NutritionTracking />
+            return <NutritionTracking index={0} />
         case 1:
-            return <FoodInput />
+            return <FoodInput index={1} />
         case 2:
-            return <FoodList />
+            return <FoodList index={2} />
         case 3:
-            return <UserSpecification />
+            return <UserSpecification index={3} />
     }
 }
 
-const StyledBox = styled(Box)({
+const StyledBox = styled(Grid)({
     height: "100vh",
     width: "100%",
     backgroundColor: "white",
-    padding: "50px 80px"
 })
 
 const Root = () => {
-    const { tab } = useTab()
+    const { currentPage } = useSidebar()
 
     return (
-        <StyledBox>
-            { selectPage(tab) }
+        <StyledBox container>
+            <Sidebar />
+            <Grid
+                item
+                sx={{
+                    height: "100%",
+                    width: `${100 - 18}%`,
+                    padding: "30px 15px",
+                    overflow: "auto",
+                    backgroundColor: "#f3f3f3",
+                }}
+            >
+                { selectPage(currentPage) }
+            </Grid>
         </StyledBox>
     )
 }
 
-export default Root
+export default withPageAuthRequired(Root)

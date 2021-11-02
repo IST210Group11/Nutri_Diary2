@@ -8,16 +8,21 @@ import TabProvider from "../components/base/TabProvider";
 import {theme} from "../theme";
 import {useEffect} from "react";
 import ApiProvider from "../components/base/ApiProvider";
-import { useUser } from '@auth0/nextjs-auth0';
+import {useUser, WithPageAuthRequired, withPageAuthRequired} from '@auth0/nextjs-auth0';
+import UserProvider from '../components/base/UserProvider'
+import SidebarProvider from "../components/base/SidebarProvider";
 
 export default function Home() {
+    const { user } = useUser()
+
     return (
         <ThemeProvider theme={theme}>
             <ApiProvider>
-                <TabProvider>
-                    <Navbar />
-                    <Root />
-                </TabProvider>
+                <SidebarProvider>
+                    <UserProvider>
+                        <Root />
+                    </UserProvider>
+                </SidebarProvider>
             </ApiProvider>
         </ThemeProvider>
     )

@@ -36,34 +36,58 @@ const ApiProvider = ({ children }) => {
         }
     }
 
-    const getFoodList = async () => {
+    const getFoodList = async (user_id) => {
         try {
-            return (await api.get("/foodlist")).data
+            return (await api.get(`/foodlist/${user_id}`)).data
         } catch (e) {
             console.error(e)
         }
     }
 
-    const addFoodList = async (description) => {
+    const addFoodList = async (user_id, description) => {
         try {
-            return (await api.post("/foodlist/create", {description})).data
+            return (await api.post("/foodlist/create", {user_id, description})).data
         } catch (e) {
             console.error(e)
         }
     }
 
-    const removeFoodList = async (description) => {
+    const removeFoodList = async (user_id, description) => {
         try {
-            return (await api.post("/foodlist/remove", {description})).data
+            return (await api.post("/foodlist/remove", {user_id, description})).data
         } catch (e) {
             console.error(e)
         }
     }
 
 
-    const getNutrientSum = async () => {
+    const getNutrientSum = async (user_id) => {
         try {
-            return (await api.get("/foodlist/nutrientsum")).data
+            return (await api.get(`/foodlist/nutrientsum/${user_id}`)).data
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    const createUser = async (user_id) => {
+        try {
+            return (await api.post("/user", { user_id })).data
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    const getUser = async (user_id) => {
+        try {
+            return (await api.get(`/user/${user_id}`)).data
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
+    const updateUserSpecification = async (user_id, specification) => {
+        try {
+            return (await api.post("/user/specification", { user_id, specification })).data
         } catch (e) {
             console.error(e)
         }
@@ -77,7 +101,10 @@ const ApiProvider = ({ children }) => {
         addFoodList,
         removeFoodList,
         getNutrientSum,
-        getDVNutrient
+        getDVNutrient,
+        createUser,
+        getUser,
+        updateUserSpecification
     }), [
         api,
         getDescriptions,
@@ -86,7 +113,10 @@ const ApiProvider = ({ children }) => {
         addFoodList,
         removeFoodList,
         getNutrientSum,
-        getDVNutrient
+        getDVNutrient,
+        createUser,
+        getUser,
+        updateUserSpecification
     ])
 
     return (

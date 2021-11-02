@@ -5,25 +5,15 @@ export default async (req, res) => {
     if (req.method === "POST") {
         await dbConnect()
 
-        const { description } = req.body
+        const { description, user_id } = req.body
 
         try {
-            console.log(description)
             const data = await new Promise((resolve, reject) => {
-                foodlist.create({ ...description }, (err, doc) => {
+                foodlist.create({ ...description, user_id }, (err, doc) => {
                     if (err) return reject(err)
                     else return resolve(doc)
                 })
             })
-
-
-            // const data = await getRepo(connection, "FDC")
-            //     .find({
-            //         where: {
-            //             description: Like(`%${description}%`),
-            //         },
-            //         take: 20
-            //     })
             res.status(200).json({ data })
         } catch (e) {
             console.error(e)

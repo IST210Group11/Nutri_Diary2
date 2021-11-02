@@ -2,6 +2,9 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {Button, Grid, styled, Typography} from "@mui/material";
 import SearchBar from "../base/SearchBar";
 import {useApi} from "../base/ApiProvider";
+import FoodRowLegend from "../base/FoodRowLegend";
+import FoodRow from "../base/FoodRow";
+import {useAuthUser} from "../base/UserProvider";
 
 
 const StyledButton = styled(Button)({
@@ -25,6 +28,7 @@ const SearchItem = ({ description, index }) => {
             console.error(e)
         }
     }
+
     return (
         <Grid item container xs={12} sx={{ mt: index > 0 ? 3 : 0 }}>
             <Grid item container direction="column" xs={10}>
@@ -101,31 +105,28 @@ const FoodSearch = ({ descriptions }) => {
     return null
 }
 
-const FoodList = () => {
+const FoodList = ({ index }) => {
     const [descriptions, setDescriptions] = useState([])
-    const [Caloriessum, setCaloriesSum] = useState(1)
     const { getFoodList } = useApi()
-    const { getNutrientSum } = useApi()
-    const action = async () => {
-        try {
-            setDescriptions((await getFoodList()).data)
-            const variable = JSON.parse((await getNutrientSum()).data)
-            setCaloriesSum(variable["Protein G"])
-            console.log(variable)
-        } catch (e) {
-            console.error(e)
-        }
-    }
-    useEffect(() => {action()},[]);
-    return (
-        <Grid item container>
-            {/* <FoodSearch descriptions={descriptions} /> */}
-            <p>
-                {Caloriessum}
-            </p>
-        </Grid>
-        
-        
+    const { user_id } = useAuthUser()
 
-    ) }  
+    useEffect(() => {
+        (async () => {
+            try {
+                setDescriptions((await getFoodList(user_id)).data)
+            } catch (e) {
+                console.error(e)
+            }
+        })()
+    },[]);
+
+    return (
+        <Grid container direction="column">
+            <FoodRowLegend />
+            {
+                descriptions.map((description, index) => <FoodRow food={description} key={index} type="remove" />)
+            }
+        </Grid>
+    )
+}
 export default FoodList
