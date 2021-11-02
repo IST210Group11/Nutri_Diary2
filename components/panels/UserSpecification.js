@@ -121,7 +121,7 @@ const UserSpecification = ({ index }) => {
                             </StyledButton>
                         </Grid>
                         <Grid item container xs={12} justifyContent="center">
-                            <a User Specifications Received/>
+                            <strong>User Specifications Received!</strong>
                         </Grid>
                     </Grid>
                 )
