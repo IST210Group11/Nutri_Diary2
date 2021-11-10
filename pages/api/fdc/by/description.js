@@ -8,12 +8,11 @@ export default async (req, res) => {
     if (req.method === "POST") {
         await dbConnect()
 
-        const { descriptionname } = req.body
+        const { description } = req.body
 
         try {
-            // const data = await FDC.find({ description: new RegExp(description) }).exec()
-            const data = await FDC.find({description:{'$regex' : descriptionname, '$options' : 'i'}}).exec()
-            db.collection.find({description:{'$regex' : descriptionname, '$options' : 'i'}})
+            // const data = await FDC.find({ description: new RegExp(description), '$options' : 'i' }).exec()
+            const data = await FDC.find({description: {$regex: description, $options: 'i'}}).exec()
 
 
             // const data = await getRepo(connection, "FDC")
