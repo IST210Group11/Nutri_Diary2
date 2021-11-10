@@ -26,15 +26,15 @@ const StyledButton = styled(Button)({
 
 
 const UserSpecification = ({ index }) => {
-    const { height,gender,age,weight} = useAuthUser()
-    // const [gender, setGender] = useState("male")
-    // const [height, setHeight] = useState(70)
-    // const [age, setAge] = useState(20)
-    // const [weight ,setWeight] = useState(180)
-    const [gender, setGender] = useState(gender)
-    const [height, setHeight] = useState(height)
-    const [age, setAge] = useState(age)
-    const [weight ,setWeight] = useState(weight)
+    // const { height,gender,age,weight} = useAuthUser()
+    const [gender, setGender] = useState("male")
+    const [height, setHeight] = useState(70)
+    const [age, setAge] = useState(20)
+    const [weight ,setWeight] = useState(180)
+    // const [gender, setGender] = useState(gender)
+    // const [height, setHeight] = useState(height)
+    // const [age, setAge] = useState(age)
+    // const [weight ,setWeight] = useState(weight)
     const { updateUserSpecification } = useApi()
     const { user_id } = useAuthUser()
 
