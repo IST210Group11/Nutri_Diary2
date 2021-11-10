@@ -26,15 +26,15 @@ const StyledButton = styled(Button)({
 
 
 const UserSpecification = ({ index }) => {
-    // const { height,gender,age,weight} = useAuthUser()
-    const [gender, setGender] = useState("male")
-    const [height, setHeight] = useState(70)
-    const [age, setAge] = useState(20)
-    const [weight ,setWeight] = useState(180)
-    // const [gender, setGender] = useState(gender)
-    // const [height, setHeight] = useState(height)
-    // const [age, setAge] = useState(age)
-    // const [weight ,setWeight] = useState(weight)
+    const { height,gender,age,weight} = useAuthUser()
+    // const [gender, setGender] = useState("male")
+    // const [height, setHeight] = useState(70)
+    // const [age, setAge] = useState(20)
+    // const [weight ,setWeight] = useState(180)
+    const [gender1, setGender] = useState(gender)
+    const [height1, setHeight] = useState(height)
+    const [age1, setAge] = useState(age)
+    const [weight1 ,setWeight] = useState(weight)
     const { updateUserSpecification } = useApi()
     const { user_id } = useAuthUser()
 
@@ -58,7 +58,7 @@ const UserSpecification = ({ index }) => {
         try {
             console.log(user_id)
             if (user_id)
-                await updateUserSpecification(user_id, { gender, height, age, weight })       
+                await updateUserSpecification(user_id, { gender1, height1, age1, weight1 })       
         } catch (e) {
             console.error(e)
         }
@@ -69,7 +69,7 @@ const UserSpecification = ({ index }) => {
             <Grid item xs={3}>
                 <TextField
                     fullWidth
-                    value={height}
+                    value={height1}
                     onChange={onChangeHeight}
                     label="Height"
                     variant="outlined"
@@ -82,7 +82,7 @@ const UserSpecification = ({ index }) => {
             <Grid item xs={3}>
                 <TextField
                     fullWidth
-                    value={age}
+                    value={age1}
                     onChange={onChangeAge}
                     label="Age"
                     variant="outlined"
@@ -92,7 +92,7 @@ const UserSpecification = ({ index }) => {
             <Grid item xs={3}>
                 <TextField
                     fullWidth
-                    value={weight}
+                    value={weight1}
                     onChange={onChangeWeight}
                     label="Weight"
                     variant="outlined"
@@ -107,7 +107,7 @@ const UserSpecification = ({ index }) => {
                     <InputLabel id="gender-input">Gender</InputLabel>
                     <Select
                         labelId="gender-input"
-                        value={gender}
+                        value={gender1}
                         onChange={onChangeGender}
                         label="Gender"
                     >
