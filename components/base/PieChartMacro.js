@@ -8,7 +8,7 @@ const PieChartMacro = ({ progress }) => {
 
   return (
     <PieChart width={250} height={250}>
-        <Pie data = {[{name: "Progress",value: progress},{name: "Left",value: (100 - progress)}]}
+        <Pie data = {[{name: "Progress",value: Math.max(progress,100)},{name: "Left",value: (100 - Math.max(progress,100))}]}
         dataKey="value" 
         nameKey="name" 
         startAngle={90}

@@ -11,7 +11,7 @@ export default async (req, res) => {
         const { description } = req.body
 
         try {
-            // const data = await FDC.find({ description: new RegExp(description), '$options' : 'i' }).exec()
+            // const data = await FDC.find({ description: new RegExp(description)).exec()
             const data = await FDC.find({description: {$regex: description, $options: 'i'}}).exec()
 
 
