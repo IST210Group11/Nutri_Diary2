@@ -1,6 +1,6 @@
 import { Cell, Label, Pie, PieChart } from "recharts";
 
-const COLORS = ['#FCCF3E', '#D3D3D3'];
+const COLORS = ['#DA291C', '#FFC72C'];
 const progressLabel = [{name: "Progress",value: 60},{name: "Left",value: 40}]
 
 const PieChartMacro = ({ progress }) => {

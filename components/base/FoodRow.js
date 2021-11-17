@@ -60,22 +60,22 @@ const FoodRow = ({ food, type }) => {
 
     return (
         <StyledRow container columns={16} sx={{mt: 2}}>
-            <Grid item xs={4}>
+            <Grid item xs={10}>
                 <FoodText maxLines={2} text={description} />
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 <FoodText text={energy} />
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 <FoodText text={protein} />
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 <FoodText text={carbo} />
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 <FoodText text={fat} />
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 {type === "add" ?
                     <TextField
                         variant="standard"
@@ -90,7 +90,7 @@ const FoodRow = ({ food, type }) => {
                     <FoodText text={`${food["Amount in g"]} g`}/>
                 }
             </Grid>
-            <Grid item container xs={2} justifyContent="center">
+            <Grid item container xs={1} justifyContent="center">
                 <StyledButton
                     variant="text"
                     onClick={onSubmit}

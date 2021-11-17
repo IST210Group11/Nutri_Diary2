@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {
-    Button,
+    Button,styled,
     Grid, Typography,
 } from "@mui/material";
 import {useApi} from "../base/ApiProvider";
@@ -8,6 +8,16 @@ import PieCard from "../base/PieCard";
 import BarCard from "../base/BarCard";
 import {useAuthUser} from "../base/UserProvider";
 import {useSidebar} from "../base/SidebarProvider";
+
+const CardContainer = styled(Grid)({
+    width: "100%",
+    height: "100%",
+    backgroundColor: "white",
+    boxShadow: "2px 2px 10px 0px rgba(0, 0, 0, 0.08)",
+    borderRadius: "20px",
+    padding: "10px 10px",
+  })
+  
 
 const dailyValues = {
     "Calcium, Ca MG": 1300,
@@ -93,11 +103,52 @@ const NutritionTracking = ({ index }) => {
         )
     }
 
-    const handleClick = () => {
+    const createInfoRow = (field) => {
+        const myArray = field.split(" ");
+        const name = myArray.at(0).split(",");
+        
+        switch (name.at(0)) {
+            case "Vitamin":
+                return (
+                    <grid>
+                        <Typography
+                            fontSize={20}
+                            fontWeight="bold"
+                            fontFamily="Montserrat"
+                        >
+                            {myArray.at(0)} {myArray.at(1)}
+                        </Typography>
+                        <p>Recommended Daily Intake: {Number(dailyValues[field] * factor).toFixed(2)} {myArray.at(-1)}</p>
+                        <p>Current Intake: {Number(nutrientSums[field]).toFixed(2)} {myArray.at(-1)}</p>
+                        <p>Remaining: {Math.max(Number((dailyValues[field] * factor) -(nutrientSums[field])).toFixed(2),0)} {myArray.at(-1)}</p>
+                    </grid>
+                )
+            default: 
+                return (
+                    <grid>
+                        <Typography
+                            fontSize={20}
+                            fontWeight="bold"
+                            fontFamily="Montserrat"
+                        >
+                            {name.at(0)}
+                        </Typography>
+                        <p>Recommended Daily Intake: {Number(dailyValues[field] * factor).toFixed(2)} {myArray.at(-1)}</p>
+                        <p>Current Intake: {Number(nutrientSums[field]).toFixed(2)} {myArray.at(-1)}</p>
+                        <p>Remaining: {Math.max(Number((dailyValues[field] * factor) -(nutrientSums[field])).toFixed(2),0)} {myArray.at(-1)}</p>
+                    </grid>
+                )
+        }
+        
+    }
+    const handleClick1 = () => {
         changePage(1)  // change to food input
     }
 
-    if (!nutrientSums || !factor || !height) {
+    const handleClick2 = () => {
+        changePage(3)  // change to food input
+    }
+    if (!nutrientSums) {
         return (
             <Grid container justifyContent="center" alignItems="center" height="100%" direction="column">
                 <Typography
@@ -110,7 +161,7 @@ const NutritionTracking = ({ index }) => {
                 <Button
                     variant="outlined"
                     sx={{ backgroundColor: "#2878DA", color: "white", padding: "10px 30px" }}
-                    onClick={handleClick}
+                    onClick={handleClick1}
                 >
                     <Typography
                         fontSize={32}
@@ -124,6 +175,34 @@ const NutritionTracking = ({ index }) => {
         )
     }
 
+    if (!factor || !height) {
+        return (
+            <Grid container justifyContent="center" alignItems="center" height="100%" direction="column">
+                <Typography
+                    fontSize={50}
+                    fontWeight="bold"
+                    fontFamily="Montserrat"
+                >
+                    Enter User Specifications
+                </Typography>
+                <Button
+                    variant="outlined"
+                    sx={{ backgroundColor: "#2878DA", color: "white", padding: "10px 30px" }}
+                    onClick={handleClick2}
+                >
+                    <Typography
+                        fontSize={32}
+                        fontWeight="bold"
+                        fontFamily="Montserrat"
+                    >
+                        User Specifications
+                    </Typography>
+                </Button>
+            </Grid>
+        )
+    }
+
+
     return (
         <>
             <Grid container xs={12} spacing={2} justifyContent="center">
@@ -131,6 +210,26 @@ const NutritionTracking = ({ index }) => {
             </Grid>
             <Grid container xs={12} sx={{ mt: 3 }}>
                 <BarCard data={barChartData} />
+            </Grid>
+            <Grid container xs={12} sx={{ mt: 3 }}>
+                <CardContainer
+                    direction="column"
+                    container
+                >
+                    <Grid item>
+                        <Typography
+                            fontSize={30}
+                            fontWeight="bold"
+                            color="#000"
+                        >
+                            Nutrition Summary
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        { pieChartFields.map(createInfoRow) }
+                        { barChartFields.map(createInfoRow) }
+                    </Grid>
+                </CardContainer>
             </Grid>
         </>
     )

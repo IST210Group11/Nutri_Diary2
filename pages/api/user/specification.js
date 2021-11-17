@@ -4,9 +4,8 @@ import User from '../../../entities/user'
 export default async (req, res) => {
     const { user_id, specification } = req.body
     const { height, weight } = specification
-
-    const factor = (height / 70) * (weight / 180)
-
+    
+    const factor = Math.min((Math.max(((height / 70) * (weight / 180)),0.5)),2)
     console.log("FACTOR", factor)
 
     await dbConnect()

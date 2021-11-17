@@ -22,6 +22,7 @@ const SearchItem = ({ description, index }) => {
         setWeight(event.target.value)
     }
 
+    
     const handleClick = async () => {
         try {
             const description2 = {
@@ -48,8 +49,10 @@ const SearchItem = ({ description, index }) => {
             }
 
             console.log("DESCRIPTION2", description2)
-
+            
             await addFoodList(description2)
+
+            
         } catch (e) {
             console.error(e)
         }
@@ -115,10 +118,11 @@ const SearchItem = ({ description, index }) => {
                 />
             </Grid>
             <Grid item xs={2} alignItems="center" container justifyContent="center">
-                <StyledButton variant="text" onClick={handleClick} >
+                <StyledButton id = "test" variant="text" onClick={handleClick} >
                     <Typography
                         sx={{ fontSize: 12, fontWeight: "bold" }}
                         color="white"
+                        id = "temp"
                     >
                         Add
                     </Typography>

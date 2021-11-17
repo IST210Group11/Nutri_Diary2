@@ -5,25 +5,25 @@ const LegendText = ({ text }) => <Typography color="#a0a0a0" fontSize={16} fontW
 const FoodRowLegend = () => {
     return (
         <Grid container columns={16}>
-            <Grid item xs={4} justifyContent="center" container>
+            <Grid item xs={10} justifyContent="flex_start" container>
                 <LegendText text="Description" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Calories" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Protein" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Carbohydrates" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Fat" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Amount" />
             </Grid>
-            <Grid item xs={2} justifyContent="center" container>
+            <Grid item xs={1} justifyContent="center" container>
                 <LegendText text="Action" />
             </Grid>
         </Grid>
